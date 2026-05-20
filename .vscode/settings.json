@@ -1,0 +1,11 @@
+{
+  "java.project.referencedLibraries": [
+    "${workspaceFolder}/webapp/WEB-INF/lib/*.jar",
+    "${workspaceFolder}/tomcat/lib/*.jar",
+    "C:/xampp/tomcat/lib/servlet-api.jar"
+  ],
+  "java.project.sourcePaths": [
+    "src/web/main/java"
+  ],
+  "java.project.outputPath": "webapp/WEB-INF/classes"
+}

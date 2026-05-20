@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết phim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">🎬 Blog Review Phim</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4" id="movie-detail">
+        <div class="text-center">
+            <h1>Đang tải thông tin phim...</h1>
+        </div>
+    </div>
+
+    <script>
+        const movies = {
+            1: {
+                title: 'Inception',
+                genre: 'Sci-Fi',
+                year: 2010,
+                poster: 'https://th.bing.com/th/id/R.681b6734ab79ff82ba4d0ca3813e177e?rik=eaUSDjMti0HyUQ&riu=http%3a%2f%2fwww.impawards.com%2f2010%2fposters%2finception_ver12_xlg.jpg&ehk=1O091aue329B%2bftsggNyYINXbELp2FyYNGaO%2b4DhVwk%3d&risl=&pid=ImgRaw&r=0',
+                reviews: ['Phim quá hay, nội dung hack não!', 'Âm nhạc tuyệt vời, hình ảnh đẹp.']
+            },
+            2: {
+                title: 'The Dark Knight',
+                genre: 'Action',
+                year: 2008,
+                poster: 'https://th.bing.com/th/id/R.a731f35ca4dc3969ef28fcf54dfca9d1?rik=T%2bIOFXI3%2btiC1g&pid=ImgRaw&r=0',
+                reviews: ['Diễn xuất của Heath Ledger thật sự kinh điển.', 'Cốt truyện đầy gay cấn và cảm xúc.']
+            },
+            3: {
+                title: 'Interstellar',
+                genre: 'Sci-Fi',
+                year: 2014,
+                poster: 'https://i.pinimg.com/originals/8e/0d/ab/8e0dab8699be85720ce55845065bf6dc.jpg',
+                reviews: ['Hành trình du hành vũ trụ ám ảnh.', 'Cảm xúc mãnh liệt và hình ảnh tuyệt vời.']
+            },
+            4: {
+                title: 'Parasite',
+                genre: 'Drama',
+                year: 2019,
+                poster: 'https://th.bing.com/th/id/OIP.cm-DZeSYHhDcpqZKHRAx8QHaLH?pid=ImgDet&w=640&h=960&rs=1',
+                reviews: ['Thông điệp xã hội sắc bén và đầy bất ngờ.', 'Kịch bản tuyệt vời và diễn xuất vượt trội.']
+            },
+            5: {
+                title: 'Avengers: Endgame',
+                genre: 'Action',
+                year: 2019,
+                poster: 'https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SY679_.jpg',
+                reviews: ['Hành trình cảm xúc 10 năm của MCU.', 'Nhiều cảnh đấu trí và chiến đấu hoành tráng.']
+            },
+            6: {
+                title: 'Joker',
+                genre: 'Drama',
+                year: 2019,
+                poster: 'https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg',
+                reviews: ['Một lát cắt tâm lý đầy đen tối.', 'Diễn xuất của Joaquin Phoenix quá tuyệt.']
+            },
+            7: {
+                title: 'The Matrix',
+                genre: 'Sci-Fi',
+                year: 1999,
+                poster: 'https://m.media-amazon.com/images/I/51EG732BV3L.jpg',
+                reviews: ['Một bom tấn khoa học viễn tưởng làm thay đổi cả điện ảnh.', 'Hiệu ứng hành động và ý tưởng tuyệt vời.']
+            },
+            8: {
+                title: 'The Shawshank Redemption',
+                genre: 'Drama',
+                year: 1994,
+                poster: 'https://m.media-amazon.com/images/I/51NiGlapXlL.jpg',
+                reviews: ['Một câu chuyện cảm động về hy vọng và tự do.', 'Diễn xuất bùng nổ và kịch bản xuất sắc.']
+            },
+            9: {
+                title: 'The Lord of the Rings: The Fellowship of the Ring',
+                genre: 'Fantasy',
+                year: 2001,
+                poster: 'https://m.media-amazon.com/images/I/51Qvs9i5a%2BL.jpg',
+                reviews: ['Hành trình sử thi đầy kỳ vĩ.', 'Thiết kế thế giới và nhân vật hoàn hảo.']
+            },
+            10: {
+                title: 'Spider-Man: Into the Spider-Verse',
+                genre: 'Animation',
+                year: 2018,
+                poster: 'https://m.media-amazon.com/images/I/81Ni3D2sZtL._AC_SY679_.jpg',
+                reviews: ['Phong cách hoạt hình mới mẻ, rất sáng tạo.', 'Câu chuyện cảm động dành cho mọi lứa tuổi.']
+            }
+        };
+
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const movieId = getQueryParam('id');
+        const movie = movies[movieId];
+        const container = document.getElementById('movie-detail');
+
+        if (!movie) {
+            container.innerHTML = '<div class="alert alert-danger text-center">Không tìm thấy phim. Vui lòng quay lại trang chủ.</div>';
+        } else {
+            container.innerHTML = `
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="${movie.poster}" class="img-fluid rounded" alt="${movie.title}">
+                    </div>
+                    <div class="col-md-8">
+                        <h1>${movie.title} (${movie.year})</h1>
+                        <p><strong>Thể loại:</strong> ${movie.genre}</p>
+                        <p>Đây là trang chi tiết tĩnh cho bộ phim. Bạn có thể bổ sung review của mình qua hệ thống nếu chuyển sang ứng dụng động.</p>
+                    </div>
+                </div>
+                <hr>
+                <h4>Review mẫu</h4>
+                <div class="list-group">
+                    ${movie.reviews.map(review => `<div class="list-group-item">${review}</div>`).join('')}
+                </div>
+            `;
+        }
+    </script>
+    <div class="container">
+
+    <h2>Bình luận phim</h2>
+
+    <div class="comment-box">
+        <input type="text" id="commentInput" placeholder="Nhập bình luận...">
+        <button onclick="addComment()">Gửi</button>
+    </div>
+
+    <div class="comment-list" id="commentList"></div>
+
+</div>
+
+<script>
+
+    function addComment(){
+
+        let input =
+            document.getElementById("commentInput");
+
+        let comment =
+            input.value;
+
+        if(comment.trim() === ""){
+            return;
+        }
+
+        let div =
+            document.createElement("div");
+
+        div.className = "comment-item";
+
+        div.innerText = comment;
+
+        document
+            .getElementById("commentList")
+            .appendChild(div);
+
+        input.value = "";
+    }
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
